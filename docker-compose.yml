@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  connector:
+    build: .
+    command: bundle exec rackup --host 0.0.0.0 -p 80
+    ports:
+      - "80:80"
+    volumes:
+      - .:/connector
+      - log:/connector/log
+      - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.16.2
+    volumes:
+      - log:/source_logs
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:7.16.2
+    volumes:
+      - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+    user: root
+volumes:
+  log:
