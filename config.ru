@@ -1,6 +1,4 @@
-def config_yml
-  @_config_yml ||= YAML.load(File.open('./config.yml'))
-end
+require './config'
 
 log = File.new('log/connector.log', 'a+')
 $stdout.reopen(log)
@@ -13,11 +11,11 @@ $stdout.sync = true
 require './connector'
 
 require 'elastic-apm'
-if config_yml.dig('elastic', 'apm' 'enabled')
+if config_yml.dig('elastic', 'apm', 'enabled')
   ElasticAPM.start(
     app: Connector,
-    server_url: config_yml.dig('elastic', 'apm' 'url'),
-    secret_token: config_yml.dig('elastic', 'apm' 'secret_token'),
+    server_url: config_yml.dig('elastic', 'apm', 'host'),
+    secret_token: config_yml.dig('elastic', 'apm', 'secret_token'),
   )
 end
 

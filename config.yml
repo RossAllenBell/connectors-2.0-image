@@ -1,8 +1,9 @@
 elastic:
   enterprise_search:
-    url: 'http://host.docker.internal:3200'
-    access_token: 'changeme'
+    host: 'http://host.docker.internal:3002'
+    username: 'elastic'
+    password: 'changeme'
   apm:
     enabled: false
-    url: 'http://host.docker.internal:8200'
+    host: 'host.docker.internal:8200'
     secret_token: 'changeme'

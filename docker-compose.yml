@@ -9,6 +9,8 @@ services:
       - .:/connector
       - log:/connector/log
       - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml:ro
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
   filebeat:
     image: docker.elastic.co/beats/filebeat:7.16.2
     volumes:
