@@ -8,6 +8,10 @@ $stderr.reopen(log)
 $stderr.sync = true
 $stdout.sync = true
 
+require 'ecs_logging/middleware'
+use EcsLogging::Middleware, $stdout
+use EcsLogging::Middleware, $stderr
+
 require './connector'
 
 require 'elastic-apm'

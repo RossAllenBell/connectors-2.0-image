@@ -1,13 +1,11 @@
 require 'sinatra/base'
 require 'elastic-apm'
-require 'ecs_logging/middleware'
 require 'elastic-enterprise-search'
 
 require './config'
 
 class Connector < Sinatra::Base
   use ElasticAPM::Middleware
-  use EcsLogging::Middleware, $stdout
 
   SOURCE_NAME = 'Test Custom Source Ruby'
 
